@@ -21,7 +21,10 @@
             <version>4.40.0</version>
         </dependency>
     </dependencies>
-
+    <build>
+        <!--for convenience in package and build adapte this line with your directory source if needed-->
+        <sourceDirectory>..\be.bnp.bekaCookware\kata-demo\src\main\java\be\bnp\beka\cookware</sourceDirectory>
+    </build>
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
