@@ -36,7 +36,7 @@ public final class WebDriverFactory {
         Device device = Device.valueOf(deviceStr.trim().toUpperCase());
 
         boolean useRemote = remoteUrl != null && !remoteUrl.trim().isEmpty();
-
+        WebDriver wd = null;
         switch (browser) {
             case CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -45,45 +45,27 @@ public final class WebDriverFactory {
                 prefs.put("intl.accept_languages", lang);
                 chromeOptions.setExperimentalOption("prefs", prefs);
 
-                // device emulation for PHONE/TABLET using mobileEmulation or viewport args
-                if (device == Device.PHONE) {
-                    Map<String, String> mobileEmulation = new HashMap<>();
-                    mobileEmulation.put("deviceName", "Pixel 5");
-                    chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
-                } else if (device == Device.TABLET) {
-                    Map<String, Object> tabletEmu = new HashMap<>();
-                    tabletEmu.put("deviceMetrics", Map.of("width", 820, "height", 1180, "pixelRatio", 2));
-                    chromeOptions.setExperimentalOption("mobileEmulation", tabletEmu);
-                } else { // DESKTOP
-                    chromeOptions.addArguments("--window-size=1920,1080");
-                }
-
                 if (useRemote) {
-                    return new RemoteWebDriver(toURL(remoteUrl), chromeOptions);
+                    wd = new RemoteWebDriver(toURL(remoteUrl), chromeOptions);
                 } else {
                     // if using WebDriverManager, ensure driver binary is available
-                    return new ChromeDriver(chromeOptions);
+                    wd = new ChromeDriver(chromeOptions);
                 }
+                DevToolsEmulation.applyEmulation(wd, device);
+                return wd;
 
             case FIREFOX:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
+                // language
                 firefoxOptions.addPreference("intl.accept_languages", lang);
 
-                if (device == Device.PHONE) {
-                    // approximate mobile by setting user agent and window size
-                    firefoxOptions.addPreference("general.useragent.override",
-                            "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Mobile Safari/537.36");
-                } else if (device == Device.TABLET) {
-                    firefoxOptions.addPreference("general.useragent.override",
-                            "Mozilla/5.0 (Linux; Android 11; Tablet) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36");
-                } // desktop uses defaults
-
                 if (useRemote) {
-                    return new RemoteWebDriver(toURL(remoteUrl), firefoxOptions);
+                    wd = new RemoteWebDriver(toURL(remoteUrl), firefoxOptions);
                 } else {
-                    return new FirefoxDriver(firefoxOptions);
+                    wd = new FirefoxDriver(firefoxOptions);
                 }
-
+                DevToolsEmulation.applyEmulation(wd, device);
+                return wd;
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browserParam);
         }
