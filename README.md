@@ -18,3 +18,23 @@ Kata - BEKA Cookware Repository is an advanced level repo to provide Functional 
 ## 3 Installation
 
 - Checkout/download the project from the git repository into a root folder
+
+## 4 Keys concept
+
+### Page Object Model
+
+Page Object Model (POM) is a design pattern in Selenium that creates an object repository to store all web elements of an application. It reduces code duplication and simplifies test case maintenance by organizing elements in separate classes.
+
+### Mobile first
+
+Mobile-first testing prioritizes testing on mobile devices before desktop, ensuring optimal performance, usability, and responsiveness for the majority of users. It focuses on touch interactions, smaller screen layouts, and faster load times, crucial for SEO and user experience. 
+
+- Responsive Design Validation: Ensure layout adjusts seamlessly across screen sizes, with proper content hierarchy, "hamburger" menus, and accessible buttons.
+
+### Triple A Patern
+
+Over the years, many approaches to unit testing have emerged, with the Arrange-Act-Assert (AAA, or 3A) pattern standing out as the most popular. This pattern involves structuring your unit tests into three steps:
+
+- Arrange: Set up the test environment.
+- Act: Execute the code to test.
+- Assert: Verify the results.
