@@ -1,6 +1,6 @@
 package utils.typedEnum;
 
-enum browserEnum {
+public enum Browser {
     CHROME,
     FIREFOX
 }

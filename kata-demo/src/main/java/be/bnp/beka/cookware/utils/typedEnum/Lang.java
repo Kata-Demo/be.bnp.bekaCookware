@@ -1,6 +1,6 @@
 package utils.typedEnum;
 
-enum langEnum {
+public enum Lang {
     EN,
     FR,
     NL,

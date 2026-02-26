@@ -1,7 +1,7 @@
 package utils.typedEnum;
 
-enum deviceEnum {
+public enum Device {
     PHONE,
     TABLET,
-    DESCTOP
+    DESKTOP
 }
