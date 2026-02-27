@@ -44,7 +44,8 @@ public final class WebDriverFactory {
                 Map<String, Object> prefs = new HashMap<>();
                 prefs.put("intl.accept_languages", lang);
                 chromeOptions.setExperimentalOption("prefs", prefs);
-
+                //full screen size for webdriver launch
+                chromeOptions.addArguments("--start-maximized");
                 if (useRemote) {
                     wd = new RemoteWebDriver(toURL(remoteUrl), chromeOptions);
                 } else {
@@ -58,13 +59,25 @@ public final class WebDriverFactory {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 // language
                 firefoxOptions.addPreference("intl.accept_languages", lang);
-
+                //full screen size for webdriver launch
+                firefoxOptions.addArguments("--kiosk");
+                if (device == Device.PHONE) {
+                    // approximate mobile by setting user agent and window size
+                    firefoxOptions.addPreference("general.useragent.override",
+                            "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Mobile Safari/537.36");
+                    firefoxOptions.addArguments("--width=390");
+                    firefoxOptions.addArguments("--height=844");
+                    } else if (device == Device.TABLET) {
+                    firefoxOptions.addPreference("general.useragent.override",
+                            "Mozilla/5.0 (Linux; Android 11; Tablet) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36");
+                    firefoxOptions.addArguments("--width=820");
+                    firefoxOptions.addArguments("--height=1180");
+                } // desktop uses defaults
                 if (useRemote) {
                     wd = new RemoteWebDriver(toURL(remoteUrl), firefoxOptions);
                 } else {
                     wd = new FirefoxDriver(firefoxOptions);
                 }
-                DevToolsEmulation.applyEmulation(wd, device);
                 return wd;
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browserParam);
