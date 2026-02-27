@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import utils.ConfigLoader;
 import utils.WebDriverFactory;
 import pages.CookieConsentPopUpPage;
+import pages.GeolocationModalPage;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,9 +24,14 @@ public class Main {
 
         wd.get(baseUrl);
         CookieConsentPopUpPage CC = new CookieConsentPopUpPage(wd);
-        System.out.println("is displayed : " + CC.isDisplayed() );
-        CC.acceptIfVisible();
-        System.out.println("is displayed after consent : " + CC.waitForVisible() );
-
+        System.out.println("is cookie consent displayed : " + CC.isDisplayed() );
+        CC.accept();
+        System.out.println("is cookie consent displayed after consent : " + CC.isDisplayed() );
+        GeolocationModalPage GM = new GeolocationModalPage(wd);
+        System.out.println("is geoloc modal displayed : " + GM.isDisplayed() );
+        //GM.close();
+        //System.out.println("is geoloc modal displayed after close : " + GM.isDisplayed() );
+        GM.allow();
+        System.out.println("is geoloc modal displayed after allow : " + GM.isDisplayed() );
     }
 }
