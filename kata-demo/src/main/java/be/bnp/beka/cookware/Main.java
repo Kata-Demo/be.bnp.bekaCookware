@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import utils.ConfigLoader;
 import utils.WebDriverFactory;
 import pages.CookieConsentPopUpPage;
+import pages.FlyoutModalPage;
 import pages.GeolocationModalPage;
 
 public class Main {
@@ -21,17 +22,18 @@ public class Main {
         //WebDriver wd = WebDriverFactory.create("TABLET", "FIREFOX", "NL");
         //WebDriver wd = WebDriverFactory.create("DESKTOP", "FIREFOX", "DE");
         //nav to base url
-
         wd.get(baseUrl);
         CookieConsentPopUpPage CC = new CookieConsentPopUpPage(wd);
-        System.out.println("is cookie consent displayed : " + CC.isDisplayed() );
+        //accept cookie
         CC.accept();
-        System.out.println("is cookie consent displayed after consent : " + CC.isDisplayed() );
         GeolocationModalPage GM = new GeolocationModalPage(wd);
-        System.out.println("is geoloc modal displayed : " + GM.isDisplayed() );
-        //GM.close();
-        //System.out.println("is geoloc modal displayed after close : " + GM.isDisplayed() );
+        //allow geoloc
         GM.allow();
-        System.out.println("is geoloc modal displayed after allow : " + GM.isDisplayed() );
+        FlyoutModalPage FM = new FlyoutModalPage(wd);
+        //wait for marketing add to be visible
+        System.out.println("is marketing modal displayed : " + FM.waitForVisible() );
+        //close marketing add
+        FM.close();
+        System.out.println("is marketing modal displayed after close : " + FM.isDisplayed() );
     }
 }
