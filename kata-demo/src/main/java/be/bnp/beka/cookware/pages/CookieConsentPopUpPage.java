@@ -12,6 +12,9 @@ import java.time.Duration;
 
 /**
  * Page Object for cookie consent popup.
+ * to auto-accept cookie consent (see example below where wd is your active WebDriver).
+ *      CookieConsentPopUpPage CC = new CookieConsentPopUpPage(wd);
+ *      CC.acceptIfVisible();
  */
 public class CookieConsentPopUpPage extends Page{
 

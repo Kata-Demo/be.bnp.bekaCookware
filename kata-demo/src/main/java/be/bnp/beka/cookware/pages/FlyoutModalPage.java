@@ -10,6 +10,9 @@ import java.time.Duration;
 
 /**
  * Page Object for Marketing modal.
+ * to auto-close Marketing modal (see example below where wd is your active WebDriver).
+ *      FlyoutModalPage FM = new FlyoutModalPage(wd);
+ *      FM.closeIfVisible();
  */
 public class FlyoutModalPage {
     private final WebDriver driver;

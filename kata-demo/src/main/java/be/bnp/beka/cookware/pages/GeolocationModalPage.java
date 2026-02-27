@@ -11,8 +11,9 @@ import java.time.Duration;
 /**
  * Page Object for an in-page geolocation permission modal (not the browser native permission prompt).
  * If your app uses the browser's permission prompt, prefer configuring the browser (ChromeOptions prefs)
- * to auto-allow/block geolocation (see example below).
- *
+ * to auto-allow geolocation (see example below where wd is your active WebDriver).
+ *      GeolocationModalPage GM = new GeolocationModalPage(wd);
+ *      GM.allowIfVisible();
  */
 public class GeolocationModalPage {
 
