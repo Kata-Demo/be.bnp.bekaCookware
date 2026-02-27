@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import utils.typedEnum.Device;
+import utils.typedEnum.Lang;
 import utils.typedEnum.Browser;
 
 /**
@@ -24,16 +25,14 @@ public final class WebDriverFactory {
 
     private WebDriverFactory() {}
 
-    public static WebDriver create(String deviceParam, String browserParam, String langParam) {
+    public static WebDriver create(Device deviceParam, Browser browserParam, Lang langParam) {
         ConfigLoader cfg = ConfigLoader.get();
 
-        String browserStr = Optional.ofNullable(browserParam).orElse(cfg.getDefaultBrowser());
-        String deviceStr  = Optional.ofNullable(deviceParam).orElse(cfg.getDefaultDevice());
-        String lang       = Optional.ofNullable(langParam).orElse(cfg.getDefaultLang());
-        String remoteUrl  = cfg.get("remote.url"); // may be null/empty
+        Browser browser = Optional.ofNullable(browserParam).orElse(Browser.valueOf(cfg.getDefaultBrowser()));
+        Device device  = Optional.ofNullable(deviceParam).orElse(Device.valueOf(cfg.getDefaultDevice()));
+        Lang lang  = Optional.ofNullable(langParam).orElse(Lang.valueOf(cfg.getDefaultLang()));
 
-        Browser browser = Browser.valueOf(browserStr.trim().toUpperCase());
-        Device device = Device.valueOf(deviceStr.trim().toUpperCase());
+        String remoteUrl  = cfg.get("remote.url"); // may be null/empty
 
         boolean useRemote = remoteUrl != null && !remoteUrl.trim().isEmpty();
         WebDriver wd = null;
@@ -42,7 +41,7 @@ public final class WebDriverFactory {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 // language
                 Map<String, Object> prefs = new HashMap<>();
-                prefs.put("intl.accept_languages", lang);
+                prefs.put("intl.accept_languages", LangConverterToISO.convertToIso639(lang));
                 chromeOptions.setExperimentalOption("prefs", prefs);
                 //full screen size for webdriver launch
                 chromeOptions.addArguments("--start-maximized");
@@ -58,9 +57,9 @@ public final class WebDriverFactory {
             case FIREFOX:
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 // language
-                firefoxOptions.addPreference("intl.accept_languages", lang);
+                firefoxOptions.addPreference("intl.accept_languages", LangConverterToISO.convertToIso639(lang));
                 //full screen size for webdriver launch
-                firefoxOptions.addArguments("--kiosk");
+                //firefoxOptions.addArguments("--kiosk");
                 if (device == Device.PHONE) {
                     // approximate mobile by setting user agent and window size
                     firefoxOptions.addPreference("general.useragent.override",
