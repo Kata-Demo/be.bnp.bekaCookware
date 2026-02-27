@@ -67,7 +67,7 @@ public final class WebDriverFactory {
                             "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Mobile Safari/537.36");
                     firefoxOptions.addArguments("--width=390");
                     firefoxOptions.addArguments("--height=844");
-                    } else if (device == Device.TABLET) {
+                } else if (device == Device.TABLET) {
                     firefoxOptions.addPreference("general.useragent.override",
                             "Mozilla/5.0 (Linux; Android 11; Tablet) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36");
                     firefoxOptions.addArguments("--width=820");
