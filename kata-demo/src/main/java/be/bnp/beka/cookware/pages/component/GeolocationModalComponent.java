@@ -1,4 +1,4 @@
-package pages;
+package pages.component;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import java.time.Duration;
  *      GeolocationModalPage GM = new GeolocationModalPage(wd);
  *      GM.allowIfVisible();
  */
-public class GeolocationModalPage {
+public class GeolocationModalComponent implements IComponent{
 
     private final WebDriver driver;
     private final WebDriverWait wait;
@@ -25,12 +25,13 @@ public class GeolocationModalPage {
     private final By allowButton = By.cssSelector("div.geolocation__ctas > form > button");
     private final By closeButton = By.cssSelector("#geolocation-container > button");
 
-    public GeolocationModalPage(WebDriver driver) {
+    public GeolocationModalComponent(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(8));
     }
 
-    // Wait until modal is visible; returns true if visible within timeout
+    // Wait until is visible; returns true if visible within timeout
+    @Override
     public boolean waitForVisible() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(root));
@@ -40,7 +41,8 @@ public class GeolocationModalPage {
         }
     }
 
-    // Check if modal present & displayed
+    // Check if present & displayed
+    @Override
     public boolean isDisplayed() {
         return !driver.findElements(root).isEmpty() && driver.findElement(root).isDisplayed();
     }

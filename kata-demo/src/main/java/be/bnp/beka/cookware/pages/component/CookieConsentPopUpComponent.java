@@ -1,9 +1,8 @@
-package pages;
+package pages.component;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v142.page.Page;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,23 +15,23 @@ import java.time.Duration;
  *      CookieConsentPopUpPage CC = new CookieConsentPopUpPage(wd);
  *      CC.acceptIfVisible();
  */
-public class CookieConsentPopUpPage extends Page{
+public class CookieConsentPopUpComponent implements IComponent{
 
     private final WebDriver driver;
     private final WebDriverWait wait;
 
     // Locators
     private final By root = By.id("pandectes-banner");
-    //#pandectes-banner > div > div.cc-compliance.cc-highlight > button.cc-btn.cc-btn-decision.cc-allow
     private final By acceptBtn = By.cssSelector("#pandectes-banner > div > div.cc-compliance.cc-highlight > button.cc-btn.cc-btn-decision.cc-allow");
     private final By rejectBtn = By.cssSelector("#pandectes-banner > div > div.cc-compliance.cc-highlight > button.cc-btn.cc-btn-decision.cc-deny']");
 
-    public CookieConsentPopUpPage(WebDriver driver) {
+    public CookieConsentPopUpComponent(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(8));
     }
 
     // Wait until popup is visible (returns true if shown within timeout)
+    @Override
     public boolean waitForVisible() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(root));
@@ -43,6 +42,7 @@ public class CookieConsentPopUpPage extends Page{
     }
 
     // Returns true if popup root is present and displayed
+    @Override
     public boolean isDisplayed() {
         return driver.findElements(root).stream().anyMatch(WebElement::isDisplayed);
     }

@@ -1,4 +1,4 @@
-package pages;
+package pages.component;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ import java.time.Duration;
  *      FlyoutModalPage FM = new FlyoutModalPage(wd);
  *      FM.closeIfVisible();
  */
-public class FlyoutModalPage {
+public class FlyoutModalComponent implements IComponent{
     private final WebDriver driver;
     private final WebDriverWait wait;
 
@@ -22,12 +22,13 @@ public class FlyoutModalPage {
     private final By root = By.xpath("//div[@data-testid='FLYOUT']");
     private final By closeButton = By.cssSelector("div[data-testid='FLYOUT'] > div > div > div > button");
 
-    public FlyoutModalPage(WebDriver driver) {
+    public FlyoutModalComponent(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(8));
     }
 
     // Wait until modal is visible; returns true if visible within timeout
+    @Override
     public boolean waitForVisible() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(root));
@@ -38,6 +39,7 @@ public class FlyoutModalPage {
     }
 
     // Check if modal present & displayed
+    @Override
     public boolean isDisplayed() {
         return !driver.findElements(root).isEmpty() && driver.findElement(root).isDisplayed();
     }
