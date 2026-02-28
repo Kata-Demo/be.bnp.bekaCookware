@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import java.time.Duration;
 
 /**
- * Basic contract for all Page Objects.
+ * Basic contract for Page Objects of real page representative .
  * - getUrlPath(): page-relative path (e.g. "/login")
  * - goToUrl(driver): navigates to baseUrl + getUrlPath() and waits until isLoaded(driver) is true
  * - isLoaded(driver): page-specific accessibility check (e.g. root element visible or URL match)
