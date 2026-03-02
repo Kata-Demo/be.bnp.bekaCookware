@@ -11,7 +11,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import be.bnp.beka.cookware.utils.typedEnum.Device;
 import be.bnp.beka.cookware.utils.typedEnum.Lang;
 import be.bnp.beka.cookware.utils.typedEnum.Browser;
@@ -25,12 +24,8 @@ public final class WebDriverFactory {
 
     private WebDriverFactory() {}
 
-    public static WebDriver create(Device deviceParam, Browser browserParam, Lang langParam) {
+    public static WebDriver create(Device device, Browser browser, Lang lang) {
         ConfigLoader cfg = ConfigLoader.get();
-
-        Browser browser = Optional.ofNullable(browserParam).orElse(Browser.valueOf(cfg.getDefaultBrowser()));
-        Device device  = Optional.ofNullable(deviceParam).orElse(Device.valueOf(cfg.getDefaultDevice()));
-        Lang lang  = Optional.ofNullable(langParam).orElse(Lang.valueOf(cfg.getDefaultLang()));
 
         String remoteUrl  = cfg.get("remote.url"); // may be null/empty
 
@@ -79,7 +74,7 @@ public final class WebDriverFactory {
                 }
                 return wd;
             default:
-                throw new IllegalArgumentException("Unsupported browser: " + browserParam);
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
     }
 
