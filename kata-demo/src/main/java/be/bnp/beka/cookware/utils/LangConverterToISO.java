@@ -1,5 +1,6 @@
-package utils;
-import utils.typedEnum.Lang;
+package be.bnp.beka.cookware.utils;
+
+import be.bnp.beka.cookware.utils.typedEnum.Lang;
 
 public class LangConverterToISO {
 

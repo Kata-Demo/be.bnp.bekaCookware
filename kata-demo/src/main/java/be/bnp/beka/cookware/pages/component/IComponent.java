@@ -1,4 +1,4 @@
-package pages.component;
+package be.bnp.beka.cookware.pages.component;
 
 /**
  * Basic contract for Page Objects of Component representative .

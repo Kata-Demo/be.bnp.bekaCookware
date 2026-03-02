@@ -1,4 +1,4 @@
-package utils;
+package be.bnp.beka.cookware.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

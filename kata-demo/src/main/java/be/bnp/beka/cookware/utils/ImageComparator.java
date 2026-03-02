@@ -1,4 +1,4 @@
-package utils;
+package be.bnp.beka.cookware.utils;
 
 import org.openqa.selenium.*;
 

@@ -1,4 +1,4 @@
-package utils;
+package be.bnp.beka.cookware.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,9 +12,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import utils.typedEnum.Device;
-import utils.typedEnum.Lang;
-import utils.typedEnum.Browser;
+import be.bnp.beka.cookware.utils.typedEnum.Device;
+import be.bnp.beka.cookware.utils.typedEnum.Lang;
+import be.bnp.beka.cookware.utils.typedEnum.Browser;
 
 /**
  * Simple WebDriver factory that returns WebDriver based on device, browser, language.

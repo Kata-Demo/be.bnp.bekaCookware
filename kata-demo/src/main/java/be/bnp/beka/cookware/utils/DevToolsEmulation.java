@@ -1,4 +1,4 @@
-package utils;
+package be.bnp.beka.cookware.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.devtools.DevTools;
@@ -7,7 +7,7 @@ import org.openqa.selenium.devtools.v142.emulation.Emulation; // adjust version 
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
-import utils.typedEnum.Device;
+import be.bnp.beka.cookware.utils.typedEnum.*;
 
 /**
  * Utility to apply CDP Device Metrics emulation via Selenium DevTools.

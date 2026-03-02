@@ -26,10 +26,22 @@
             <artifactId>snakeyaml</artifactId>
             <version>2.0</version>
         </dependency>
+        <!-- Allure TestNG adapter -->
+        <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-testng</artifactId>
+        <version>2.21.0</version>
+        <scope>test</scope>
+        </dependency>
+        <!-- Allure Java Commons (optional) -->
+        <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-java-commons</artifactId>
+        <version>2.21.0</version>
+        <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
-        <!--for convenience in package and build adapte this line with your directory source if needed-->
-        <sourceDirectory>..\be.bnp.bekaCookware\kata-demo\src\main\java\be\bnp\beka\cookware</sourceDirectory>
     </build>
     <properties>
         <maven.compiler.source>25</maven.compiler.source>

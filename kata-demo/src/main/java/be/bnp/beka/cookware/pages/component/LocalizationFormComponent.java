@@ -1,4 +1,4 @@
-package pages.component;
+package be.bnp.beka.cookware.pages.component;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utils.typedEnum.Lang;
+import be.bnp.beka.cookware.utils.typedEnum.Lang;
 
 import java.time.Duration;
 

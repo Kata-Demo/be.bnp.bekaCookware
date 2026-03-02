@@ -1,4 +1,4 @@
-package pages.component;
+package be.bnp.beka.cookware.pages.component;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
