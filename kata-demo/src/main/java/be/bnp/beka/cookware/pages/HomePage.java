@@ -1,8 +1,6 @@
 package be.bnp.beka.cookware.pages;
 
 import java.time.Duration;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -55,15 +53,13 @@ public class HomePage implements IPage{
         flyoutModalComponent.closeIfVisible();
     }
 
-    public String getHomeTitleText(){
-        WebElement homeH1 = wait.until(ExpectedConditions.elementToBeClickable(homeTitle));
-        // find direct child elements of h1 and join their visible text
-        List<WebElement> children = homeH1.findElements(By.xpath("./*"));
-        return children.stream()
-                .map(WebElement::getText)
-                .filter(s -> s != null && !s.isEmpty())
-                .collect(Collectors.joining(" "));
-
+    public String getHomeTitleText() {
+        WebElement homeH1 = wait.until(ExpectedConditions.visibilityOfElementLocated(homeTitle));
+        String text = homeH1.getAttribute("textContent");
+        return java.util.Arrays.stream((text == null ? "" : text).split("\s+"))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(java.util.stream.Collectors.joining(" "));
     }
 
 
