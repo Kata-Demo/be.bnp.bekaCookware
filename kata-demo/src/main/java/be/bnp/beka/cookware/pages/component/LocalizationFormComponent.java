@@ -7,10 +7,14 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utils.typedEnum.Lang;
+
 import java.time.Duration;
 
 /**
-*  Page Object for component localization form (in banner Desktop).
+*  Page Object for component localization form.
+*    Used in banner and in footer with the same form id.
+*    Phone will click by the footer and Desktop by the banner.
 */
 public class LocalizationFormComponent implements IComponent{
 
@@ -28,11 +32,11 @@ public class LocalizationFormComponent implements IComponent{
     }
 
     /**
-     * Click the language link inside the localization form that matches the provided lang code (supported "en" "nl" "de" "fr").
+     * Click the language link inside the localization form that matches the provided Lang enum value
      */
-    public void clickLanguage(String lang) {
-        if (lang == null || lang.trim().isEmpty());
-        String code = lang.trim().toLowerCase();
+    public void clickLanguage(Lang lang) {
+        String langstr = lang.toString();
+        String code = langstr.trim().toLowerCase();
         // ensure form visible
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(form));
@@ -47,8 +51,7 @@ public class LocalizationFormComponent implements IComponent{
                 && root.findElement(langList).isDisplayed();
         if (!listVisible) {
             // try clicking the toggle to reveal the list
-            WebElement toggle = root.findElement(disclosureToggle);
-            wait.until(ExpectedConditions.elementToBeClickable(toggle)).click();
+            wait.until(ExpectedConditions.elementToBeClickable(disclosureToggle)).click();
             // short wait for list
             wait.until(ExpectedConditions.visibilityOfElementLocated(langList));
         }
@@ -60,6 +63,13 @@ public class LocalizationFormComponent implements IComponent{
             link.click();
         } catch (TimeoutException e) {
 
+        }
+        // timeout to reload page
+        try {
+            Thread.sleep(Duration.ofSeconds(1).toMillis());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Interrupted while waiting", e);
         }
     }
 
