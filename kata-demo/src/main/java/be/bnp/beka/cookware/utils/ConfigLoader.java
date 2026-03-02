@@ -13,7 +13,7 @@ public final class ConfigLoader {
     private static final String CONFIG_DIR = "config/";
     private static final String BASE_CONFIG = CONFIG_DIR + "default.properties";
     private static final String ENV_DIR = CONFIG_DIR + "environments/";
-    private static final String ENV_KEY = "environment";
+    private static final String ENV_KEY = "env";
 
     private final Properties merged = new Properties();
 
