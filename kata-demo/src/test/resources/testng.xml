@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="UI Test Suite" verbose="1" parallel="false">
+  <parameter name="device" value="DESKTOP"/>
+  <parameter name="browser" value="CHROME"/>
+  <parameter name="lang" value="EN"/>
+  <parameter name="env" value="test"/>
+  <parameter name="base.url" value="https://www.beka-cookware.com/"/>
+  <test name="HomePageTest">
+    <classes>
+      <class name="be.bnp.beka.cookware.tests.HomePageTest"/>
+    </classes>
+  </test>
+</suite>
+
