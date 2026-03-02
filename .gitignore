@@ -15,3 +15,10 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# Allure results & generated reports
+/target/allure-results/
+/target/allure-report/
+/allure-results/
+/allure-report/
+/allure-report.zip
